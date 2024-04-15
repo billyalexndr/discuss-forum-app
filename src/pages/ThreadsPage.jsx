@@ -30,7 +30,7 @@ const ThreadsPage = () => {
 
   const threadList = threads.map((thread) => ({
     ...thread,
-    user: users.find((user) => user.id === thread.user),
+    user: users.find((user) => user.id === thread.ownerId),
     authUser: authUser.id,
   }));
 
@@ -38,7 +38,7 @@ const ThreadsPage = () => {
     <>
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
         <h1 className="text-4xl font-bold">Hello Threads!</h1>
-        <ThreadList threads={threads} />
+        <ThreadList threads={threadList} />
       </div>
     </>
   );

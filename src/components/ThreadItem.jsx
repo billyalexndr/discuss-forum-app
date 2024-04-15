@@ -9,7 +9,7 @@ const ThreadItem = ({
   body,
   category,
   createdAt,
-  ownerId,
+  user,
   upVotes,
   downVotes,
   authUser,
@@ -49,8 +49,11 @@ const ThreadItem = ({
         />
         <div className="flex gap-3">
           <p>{postedAt(createdAt)}</p>
-          <p>Dibuat oleh {ownerId}</p>
+          <p className="font-medium">Dibuat oleh {user.name}</p>
         </div>
+        <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+          #{category}
+        </span>
       </div>
     </>
   );

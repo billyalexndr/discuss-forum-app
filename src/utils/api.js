@@ -101,27 +101,6 @@ const api = (() => {
         return users;
     }
 
-    async function getUserNameById(userId) {
-        const response = await fetch(`${BASE_URL}/users`);
-        const responseJson = await response.json();
-
-        const { status, message, data } = responseJson;
-
-        if (status !== 'success') {
-            throw new Error(message);
-        }
-
-        const { users } = data;
-        const user = users.find(user => user.id === userId);
-
-        if (!user) {
-            throw new Error('User not found');
-        }
-
-        return user.name;
-    }
-
-
     async function getAllThreads() {
         const response = await fetch(`${BASE_URL}/threads`);
 
@@ -224,7 +203,6 @@ const api = (() => {
         login,
         getOwnProfile,
         getAllUsers,
-        getUserNameById,
         getAllThreads,
         createThread,
         toggleUpVoteThread,
