@@ -4,7 +4,7 @@ function threadsReducer(threads = [], action = {}) {
   switch (action.type) {
     case ActionType.RECEIVE_THREADS:
       return action.payload.threads;
-    case ActionType.ADD_THREAD:
+    case ActionType.CREATE_THREAD:
       return [action.payload.thread, ...threads];
     case ActionType.TOGGLE_UPVOTE_THREAD:
       return threads.map((thread) => {

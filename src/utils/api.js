@@ -140,8 +140,9 @@ const api = (() => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                text,
-                replyTo,
+                title,
+                body,
+                category
             }),
         });
 

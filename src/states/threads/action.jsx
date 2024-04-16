@@ -3,7 +3,7 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
-  ADD_THREAD: 'ADD_THREAD',
+  CREATE_THREAD: 'CREATE_THREAD',
   TOGGLE_UPVOTE_THREAD: 'TOGGLE_UPVOTE_THREAD',
   TOGGLE_DOWNVOTE_THREAD: 'TOGGLE_DOWNVOTE_THREAD',
 };
@@ -17,9 +17,9 @@ function receiveThreadsActionCreator(threads) {
   };
 }
 
-function addThreadActionCreator(thread) {
+function createThreadActionCreator(thread) {
   return {
-    type: ActionType.ADD_THREAD,
+    type: ActionType.CREATE_THREAD,
     payload: {
       thread,
     },
@@ -28,7 +28,7 @@ function addThreadActionCreator(thread) {
 
 function toggleUpVoteThreadActionCreator({ threadsId, userId }) {
   return {
-    type: ActionType.TOGGLE_LIKE_THREAD,
+    type: ActionType.TOGGLE_UPVOTE_THREAD,
     payload: {
       threadsId,
       userId,
@@ -38,7 +38,7 @@ function toggleUpVoteThreadActionCreator({ threadsId, userId }) {
 
 function toggleDownVoteThreadActionCreator({ threadsId, userId }) {
   return {
-    type: ActionType.TOGGLE_LIKE_THREAD,
+    type: ActionType.TOGGLE_DOWNVOTE_THREAD,
     payload: {
       threadsId,
       userId,
@@ -46,12 +46,12 @@ function toggleDownVoteThreadActionCreator({ threadsId, userId }) {
   };
 }
 
-function asyncAddThread({ text, replyTo = '' }) {
+function asycnCreateThread({ title, body, category = '' }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const thread = await api.createThread({ text, replyTo });
-      dispatch(addThreadActionCreator(thread));
+      const thread = await api.createThread({ title, body, category });
+      dispatch(createThreadActionCreator(thread));
     } catch (error) {
       alert(error.message);
     }
@@ -102,10 +102,10 @@ function asyncToggleDownVoteThread(threadId) {
 export {
   ActionType,
   receiveThreadsActionCreator,
-  addThreadActionCreator,
+  createThreadActionCreator,
   toggleUpVoteThreadActionCreator,
   toggleDownVoteThreadActionCreator,
-  asyncAddThread,
+  asycnCreateThread,
   asyncToggleUpVoteThread,
   asyncToggleDownVoteThread,
 };

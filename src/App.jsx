@@ -9,9 +9,10 @@ import RegisterPage from './pages/RegisterPage';
 import DetailPage from './pages/DetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ThreadsPage from './pages/ThreadsPage';
+import LeaderboardPage from './pages/LeaderboardPage';
+import CreateThreadPage from './pages/CreateThreadPage';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
-import LeaderboardPage from './pages/LeaderboardPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -49,12 +50,13 @@ function App() {
 
   return (
     <>
-      <div className="h-screen bg-gray-100">
+      <div className="bg-gray-100">
         <Navigation signOut={onSignOut} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/threads" element={<ThreadsPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/create-thread" element={<CreateThreadPage />} />
           <Route path="/thread/:id" element={<DetailPage />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
