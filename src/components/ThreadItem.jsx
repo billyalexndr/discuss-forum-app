@@ -25,13 +25,11 @@ const ThreadItem = ({
   const onUpVoteClick = (event) => {
     event.stopPropagation();
     upVote(id);
-    console.log('liked');
   };
 
   const onDownVoteClick = (event) => {
     event.stopPropagation();
     downVote(id);
-    console.log('dislike');
   };
 
   const firstSentence = body.split('. ')[0];
