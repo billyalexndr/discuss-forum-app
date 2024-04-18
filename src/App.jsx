@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from './components/Loading';
 import LoginPage from './pages/LoginPage';
@@ -19,6 +19,7 @@ function App() {
     (states) => states,
   );
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
 
   const onSignOut = () => {
     dispatch(asyncUnsetAuthUser());
+    navigate('/');
   };
 
   if (isPreload) {

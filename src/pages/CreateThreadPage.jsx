@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ThreadInput from '../components/ThreadInput';
-import { asycnCreateThread } from '../states/threads/action';
+import { asyncCreateThread } from '../states/threads/action';
 import { useDispatch } from 'react-redux';
 
 const CreateThreadPage = () => {
   const dispatch = useDispatch();
 
   const onCreateThread = ({ title, body, category }) => {
-    dispatch(asycnCreateThread({ title, body, category }));
+    dispatch(asyncCreateThread({ title, body, category }));
   };
 
   return (

@@ -46,7 +46,7 @@ function toggleDownVoteThreadActionCreator({ threadsId, userId }) {
   };
 }
 
-function asycnCreateThread({ title, body, category = '' }) {
+function asyncCreateThread({ title, body, category = '' }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
@@ -105,7 +105,7 @@ export {
   createThreadActionCreator,
   toggleUpVoteThreadActionCreator,
   toggleDownVoteThreadActionCreator,
-  asycnCreateThread,
+  asyncCreateThread,
   asyncToggleUpVoteThread,
   asyncToggleDownVoteThread,
 };
