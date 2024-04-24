@@ -6,6 +6,7 @@ const ActionType = {
   CREATE_THREAD: 'CREATE_THREAD',
   TOGGLE_UPVOTE_THREAD: 'TOGGLE_UPVOTE_THREAD',
   TOGGLE_DOWNVOTE_THREAD: 'TOGGLE_DOWNVOTE_THREAD',
+  TOGGLE_NEUTRAL_THREAD: 'TOGGLE_NEUTRAL_THREAD',
 };
 
 function receiveThreadsActionCreator(threads) {
@@ -46,6 +47,16 @@ function toggleDownVoteThreadActionCreator({ threadsId, userId }) {
   };
 }
 
+function toggleNeutralVoteThreadActionCreator({ threadsId, userId }) {
+  return {
+    type: ActionType.TOGGLE_NEUTRAL_THREAD,
+    payload: {
+      threadsId,
+      userId,
+    },
+  };
+}
+
 function asyncCreateThread({ title, body, category = '' }) {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -61,7 +72,6 @@ function asyncCreateThread({ title, body, category = '' }) {
 
 function asyncToggleUpVoteThread(threadId) {
   return async (dispatch, getState) => {
-    dispatch(showLoading());
     const { authUser } = getState();
     dispatch(
       toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }),
@@ -71,8 +81,28 @@ function asyncToggleUpVoteThread(threadId) {
       await api.toggleUpVoteThread(threadId);
     } catch (error) {
       alert(error.message);
+      // Jika respons dari server gagal, kembalikan status upvote ke kondisi sebelumnya
       dispatch(
-        toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }),
+        toggleNeutralVoteThreadActionCreator({ threadId, userId: authUser.id }),
+      );
+    }
+  };
+}
+
+function asyncToggleNeutralVoteThread(threadId) {
+  return async (dispatch, getState) => {
+    dispatch(showLoading());
+    const { authUser } = getState();
+    dispatch(
+      toggleNeutralVoteThreadActionCreator({ threadId, userId: authUser.id }),
+    );
+
+    try {
+      await api.toggleNeutralVoteThread(threadId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(
+        toggleNeutralVoteThreadActionCreator({ threadId, userId: authUser.id }),
       );
     }
     dispatch(hideLoading());
@@ -108,4 +138,5 @@ export {
   asyncCreateThread,
   asyncToggleUpVoteThread,
   asyncToggleDownVoteThread,
+  asyncToggleNeutralVoteThread,
 };

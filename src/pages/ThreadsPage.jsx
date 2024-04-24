@@ -7,6 +7,7 @@ import { asyncPopulateDataForum } from '../states/shared/action';
 import {
   asyncToggleDownVoteThread,
   asyncToggleUpVoteThread,
+  asyncToggleNeutralVoteThread,
 } from '../states/threads/action';
 
 const ThreadsPage = () => {
@@ -23,11 +24,27 @@ const ThreadsPage = () => {
   }, [dispatch]);
 
   const onUpVote = (id) => {
-    dispatch(asyncToggleUpVoteThread({ id }));
+    if (
+      threads
+        .find((thread) => thread.id === id)
+        ?.upVotesBy.includes(authUser.id)
+    ) {
+      dispatch(asyncToggleNeutralVoteThread(id));
+    } else {
+      dispatch(asyncToggleUpVoteThread(id));
+    }
   };
 
   const onDownVote = (id) => {
-    dispatch(asyncToggleDownVoteThread({ id }));
+    if (
+      threads
+        .find((thread) => thread.id === id)
+        ?.downVotesBy.includes(authUser.id)
+    ) {
+      dispatch(asyncToggleNeutralVoteThread(id));
+    } else {
+      dispatch(asyncToggleDownVoteThread(id));
+    }
   };
 
   const threadList = threads.map((thread) => ({

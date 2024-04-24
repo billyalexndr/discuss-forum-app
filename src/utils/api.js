@@ -237,6 +237,25 @@ const api = (() => {
         }
     }
 
+    async function toggleNeutralVoteThread(id) {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${id}/neutral-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            }),
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
     return {
         putAccessToken,
         getAccessToken,
@@ -250,6 +269,7 @@ const api = (() => {
         createComment,
         toggleUpVoteThread,
         toggleDownVoteThread,
+        toggleNeutralVoteThread,
         getThreadDetail,
     };
 })();

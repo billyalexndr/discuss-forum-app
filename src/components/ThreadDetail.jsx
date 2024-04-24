@@ -25,6 +25,17 @@ const ThreadDetail = ({
   const isThreadUpVoted = upVotesBy.includes(authUser);
   const isThreadDownVoted = downVotesBy.includes(authUser);
 
+  const onUpVoteClick = (event) => {
+    event.stopPropagation();
+    upVote(id);
+    console.log(id);
+  };
+
+  const onDownVoteClick = (event) => {
+    event.stopPropagation();
+    downVote(id);
+  };
+
   return (
     <>
       <div className="w-2/4 p-6 mb-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -40,7 +51,7 @@ const ThreadDetail = ({
         <div className="flex items-center gap-3 mt-2 mb-2">
           {upVote && (
             <div className="flex items-center gap-1">
-              <button type="button">
+              <button type="button" onClick={onUpVoteClick}>
                 {isThreadUpVoted ? <BiSolidLike /> : <BiLike />}
               </button>
               {upVotesBy.length}
@@ -48,7 +59,7 @@ const ThreadDetail = ({
           )}
           {downVote && (
             <div className="flex items-center gap-1">
-              <button type="button">
+              <button type="button" onClick={onDownVoteClick}>
                 {isThreadDownVoted ? <BiSolidDislike /> : <BiDislike />}
               </button>
               {downVotesBy.length}

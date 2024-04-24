@@ -6,6 +6,7 @@ import {
   asyncReceiveThreadDetail,
   asyncToggleUpVoteThreadDetail,
   asyncToggleDownVoteThreadDetail,
+  asyncToggleNeutralVoteThreadDetail,
 } from '../states/threadDetail/action';
 import { asyncCreateComment } from '../states/comments/action';
 import NotFoundPage from './NotFoundPage';
@@ -23,12 +24,21 @@ const DetailPage = () => {
     dispatch(asyncCreateComment(id, content));
   };
 
+  // console.log(threadDetail);
   const onUpVote = (id) => {
-    dispatch(asyncToggleUpVoteThreadDetail({ id }));
+    if (threadDetail && threadDetail.upVotesBy.includes(authUser.id)) {
+      dispatch(asyncToggleNeutralVoteThreadDetail(id));
+    } else {
+      dispatch(asyncToggleUpVoteThreadDetail(id));
+    }
   };
 
   const onDownVote = (id) => {
-    dispatch(asyncToggleDownVoteThreadDetail({ id }));
+    if (threadDetail && threadDetail.downVotesBy.includes(authUser.id)) {
+      dispatch(asyncToggleNeutralVoteThreadDetail(id));
+    } else {
+      dispatch(asyncToggleDownVoteThreadDetail(id));
+    }
   };
 
   if (!threadDetail) {

@@ -49,7 +49,7 @@ const ThreadItem = ({
         <div className="flex items-center gap-3">
           {upVote && (
             <div className="flex items-center gap-1">
-              <button type="button">
+              <button type="button" onClick={onUpVoteClick}>
                 {isThreadUpVoted ? <BiSolidLike /> : <BiLike />}
               </button>
               {upVotesBy.length}
@@ -57,7 +57,7 @@ const ThreadItem = ({
           )}
           {downVote && (
             <div className="flex items-center gap-1">
-              <button type="button">
+              <button type="button" onClick={onDownVoteClick}>
                 {isThreadDownVoted ? <BiSolidDislike /> : <BiDislike />}
               </button>
               {downVotesBy.length}
