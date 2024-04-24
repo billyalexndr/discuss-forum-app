@@ -2,7 +2,6 @@ import React from 'react';
 import ThreadItem from './ThreadItem';
 
 const ThreadList = ({ threads, upVote, downVote }) => {
-  console.log(threads);
   return (
     <>
       {threads.map((thread) => (

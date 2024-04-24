@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import ThreadList from '../components/ThreadsList';
-import { asyncPopulateUsersAndThreads } from '../states/shared/action';
+import { asyncPopulateDataForum } from '../states/shared/action';
 import {
   asyncToggleDownVoteThread,
   asyncToggleUpVoteThread,
@@ -19,7 +19,7 @@ const ThreadsPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(asyncPopulateUsersAndThreads());
+    dispatch(asyncPopulateDataForum());
   }, [dispatch]);
 
   const onUpVote = (id) => {

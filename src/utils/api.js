@@ -1,7 +1,15 @@
 const api = (() => {
     const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
-    async function _fetchWithAuth(url, options = {}) {
+    function putAccessToken(token) {
+        localStorage.setItem('accessTokenForumApp', token);
+    }
+
+    function getAccessToken() {
+        return localStorage.getItem('accessTokenForumApp');
+    }
+
+    async function fetchWithAuth(url, options = {}) {
         return fetch(url, {
             ...options,
             headers: {
@@ -9,14 +17,6 @@ const api = (() => {
                 Authorization: `Bearer ${getAccessToken()}`,
             },
         });
-    }
-
-    function putAccessToken(token) {
-        localStorage.setItem('accessTokenForumApp', token);
-    }
-
-    function getAccessToken() {
-        return localStorage.getItem('accessTokenForumApp');
     }
 
     async function register({ name, email, password }) {
@@ -70,7 +70,7 @@ const api = (() => {
     }
 
     async function getOwnProfile() {
-        const response = await _fetchWithAuth(`${BASE_URL}/users/me`);
+        const response = await fetchWithAuth(`${BASE_URL}/users/me`);
 
         const responseJson = await response.json();
 
@@ -117,6 +117,22 @@ const api = (() => {
         return threads;
     }
 
+    async function getLeaderboards() {
+        const response = await fetch(`${BASE_URL}/leaderboards`);
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+
+        const { data: { leaderboards } } = responseJson;
+
+        return leaderboards;
+    }
+
     async function getThreadDetail(id) {
         const response = await fetch(`${BASE_URL}/threads/${id}`);
 
@@ -134,7 +150,7 @@ const api = (() => {
     }
 
     async function createThread({ title, body, category = '' }) {
-        const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
+        const response = await fetchWithAuth(`${BASE_URL}/threads`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -142,7 +158,7 @@ const api = (() => {
             body: JSON.stringify({
                 title,
                 body,
-                category
+                category,
             }),
         });
 
@@ -160,13 +176,13 @@ const api = (() => {
     }
 
     async function createComment({ id, content }) {
-        const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`, {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${id}/comments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content
+                content,
             }),
         });
 
@@ -184,7 +200,7 @@ const api = (() => {
     }
 
     async function toggleUpVoteThread(id) {
-        const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -203,7 +219,7 @@ const api = (() => {
     }
 
     async function toggleDownVoteThread(id) {
-        const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/down-vote`, {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${id}/down-vote`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -229,6 +245,7 @@ const api = (() => {
         getOwnProfile,
         getAllUsers,
         getAllThreads,
+        getLeaderboards,
         createThread,
         createComment,
         toggleUpVoteThread,

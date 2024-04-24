@@ -41,9 +41,9 @@ function App() {
         <Loading />
         <main>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/*" element={<NotFoundPage />} />
+            <Route path='/' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
+            <Route path='/*' element={<NotFoundPage />} />
           </Routes>
         </main>
       </>
@@ -52,15 +52,15 @@ function App() {
 
   return (
     <>
-      <div className="bg-gray-100">
+      <div className='bg-gray-100'>
         <Navigation signOut={onSignOut} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/threads" element={<ThreadsPage />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-          <Route path="/create-thread" element={<CreateThreadPage />} />
-          <Route path="/thread/:id" element={<DetailPage />} />
-          <Route path="/*" element={<NotFoundPage />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='/threads' element={<ThreadsPage />} />
+          <Route path='/leaderboard' element={<LeaderboardPage />} />
+          <Route path='/create-thread' element={<CreateThreadPage />} />
+          <Route path='/thread/:id' element={<DetailPage />} />
+          <Route path='/*' element={<NotFoundPage />} />
         </Routes>
       </div>
     </>
