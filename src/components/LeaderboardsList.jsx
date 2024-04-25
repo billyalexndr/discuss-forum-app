@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LeaderboardItem from './LeaderboardItem';
 
-const LeaderboardsList = ({ leaderboards }) => {
-  // console.log(leaderboards);
+function LeaderboardsList({ leaderboards }) {
   return (
     <>
       {leaderboards.map((leaderboard) => (
@@ -10,6 +10,20 @@ const LeaderboardsList = ({ leaderboards }) => {
       ))}
     </>
   );
+}
+
+LeaderboardsList.propTypes = {
+  leaderboards: PropTypes.arrayOf(
+    PropTypes.shape({
+      user: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        score: PropTypes.number.isRequired,
+        avatar: PropTypes.string.isRequired,
+      }).isRequired,
+      rank: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default LeaderboardsList;

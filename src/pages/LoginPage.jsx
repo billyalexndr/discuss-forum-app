@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import LoginInput from '../components/LoginInput';
 import { useDispatch } from 'react-redux';
+import LoginInput from '../components/LoginInput';
 import { asyncSetAuthUser } from '../states/authUser/action';
 
-const LoginPage = () => {
+function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -14,26 +14,25 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <section className="flex flex-col items-center justify-center min-h-screen w-full bg-gray-100">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-2xl font-semibold mb-2">Sign In</h1>
-          <p className="mb-4">
-            Please enter your email and password to sign in to your account.
+    <section className="flex flex-col items-center justify-center w-full min-h-screen bg-gray-100">
+      <div className="p-8 bg-white rounded-lg shadow-lg">
+        <h1 className="mb-2 text-2xl font-semibold">Sign In</h1>
+        <p className="mb-4">
+          Please enter your email and password to sign in to your account.
+        </p>
+        <div>
+          <LoginInput login={onLogin} />
+          <p className="mt-2">
+            Don&apos;t have an account yet?
+            <Link className="text-blue-600" to="/register">
+              {' '}
+              Register here!
+            </Link>
           </p>
-          <div>
-            <LoginInput login={onLogin} />
-            <p className="mt-2">
-              Don't have an account yet?{' '}
-              <Link className="text-blue-600" to="/register">
-                Register here!
-              </Link>
-            </p>
-          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
-};
+}
 
 export default LoginPage;

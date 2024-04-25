@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const CommentInput = ({ id, createComment }) => {
+function CommentInput({ id, createComment }) {
   const [commentContent, setCommentContent] = useState('');
   const handleTextareaChange = (event) => {
     setCommentContent(event.target.value);
@@ -20,9 +20,9 @@ const CommentInput = ({ id, createComment }) => {
 
   return (
     <>
-      <label className="block mt-4 mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+      <div className="block mt-4 mb-2 text-sm font-semibold text-gray-900 dark:text-white">
         Your commentar
-      </label>
+      </div>
       <textarea
         id="comment"
         rows="4"
@@ -30,7 +30,7 @@ const CommentInput = ({ id, createComment }) => {
         placeholder="Write your commentar here..."
         value={commentContent}
         onChange={handleTextareaChange}
-      ></textarea>
+      />
       <button
         type="button"
         onClick={handleCreateComment}
@@ -40,6 +40,11 @@ const CommentInput = ({ id, createComment }) => {
       </button>
     </>
   );
+}
+
+CommentInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  createComment: PropTypes.func.isRequired,
 };
 
 export default CommentInput;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 
-const RegisterInput = ({ register }) => {
+function RegisterInput({ register }) {
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
@@ -48,10 +48,10 @@ const RegisterInput = ({ register }) => {
       </button>
     </form>
   );
-};
+}
 
 RegisterInput.propTypes = {
-  login: PropTypes.func,
+  register: PropTypes.func.isRequired,
 };
 
 export default RegisterInput;

@@ -10,7 +10,7 @@ import {
   asyncToggleNeutralVoteThread,
 } from '../states/threads/action';
 
-const ThreadsPage = () => {
+function ThreadsPage() {
   const {
     users = [],
     threads = [],
@@ -62,27 +62,29 @@ const ThreadsPage = () => {
   }));
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-full bg-gray-100">
-          <div className="flex flex-col items-center justify-center w-full mt-4 mb-4">
-            <ThreadList
-              threads={threadList}
-              upVote={onUpVote}
-              downVote={onDownVote}
-            />
-          </div>
-          <div className="fixed bottom-4 right-4">
-            <Link to="/create-thread">
-              <button className="hover:font-bold">
-                <IoIosAddCircleOutline className="text-5xl" />
-              </button>
-            </Link>
-          </div>
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full bg-gray-100">
+        <div className="flex flex-col items-center justify-center w-full mt-4 mb-4">
+          <ThreadList
+            threads={threadList}
+            upVote={onUpVote}
+            downVote={onDownVote}
+          />
+        </div>
+        <div className="fixed bottom-4 right-4">
+          <Link to="/create-thread">
+            <button
+              type="button"
+              className="hover:font-bold"
+              aria-labelledby="button-label"
+            >
+              <IoIosAddCircleOutline className="text-5xl" />
+            </button>
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default ThreadsPage;

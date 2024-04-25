@@ -2,15 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({ signOut }) => {
+function Navigation({ signOut }) {
   return (
     <nav className="sticky top-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 start-0 dark:border-gray-600">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-        <a className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          to="/"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Forum Diskusi-KU
           </span>
-        </a>
+        </Link>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
@@ -54,10 +57,10 @@ const Navigation = ({ signOut }) => {
       </div>
     </nav>
   );
-};
+}
 
 Navigation.propTypes = {
-  signOut: PropTypes.func,
+  signOut: PropTypes.func.isRequired,
 };
 
 export default Navigation;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const ThreadInput = ({ createThread }) => {
+function ThreadInput({ createThread }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [category, setCategory] = useState('');
@@ -77,6 +77,10 @@ const ThreadInput = ({ createThread }) => {
       </button>
     </form>
   );
+}
+
+ThreadInput.propTypes = {
+  createThread: PropTypes.func.isRequired,
 };
 
 export default ThreadInput;

@@ -15,9 +15,19 @@
   "plugins": ["react"],
   "rules": {
     "eol-last": ["error", "always"],
-    "indent": ["off"],
+    "indent": "off",
     "linebreak-style": ["off", "unix"],
-    "import/prefer-default-export": ["off"],
-    "no-alert": ["off"]
+    "import/prefer-default-export": "off",
+    "no-alert": "off",
+    "no-else-return": "off",
+    "no-nested-ternary": "off",
+    "no-shadow": "off",
+    "react/jsx-props-no-spreading": "off",
+    "operator-linebreak": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "object-curly-newline": "off",
+    "react/no-danger": "off",
+    "react/jsx-curly-newline": "off"
   }
 }

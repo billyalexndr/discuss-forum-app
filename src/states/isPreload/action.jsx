@@ -1,5 +1,5 @@
-import api from '../../utils/api';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import api from '../../utils/api';
 import { setAuthUserActionCreator } from '../authUser/action';
 
 const ActionType = {

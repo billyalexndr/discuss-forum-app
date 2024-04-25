@@ -15,7 +15,7 @@ import {
   asyncToggleUpVoteComment,
 } from '../states/comments/action';
 
-const DetailPage = () => {
+function DetailPage() {
   const { id } = useParams();
   const { threadDetail = null, authUser } = useSelector((states) => states);
   const dispatch = useDispatch();
@@ -93,24 +93,22 @@ const DetailPage = () => {
   }
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-full bg-gray-100">
-          <div className="flex flex-col items-center justify-center w-full mt-4 mb-4">
-            <ThreadDetail
-              {...threadDetail}
-              authUser={authUser.id}
-              upVoteThread={onUpVoteThread}
-              downVoteThread={onDownVoteThread}
-              upVoteComment={onUpVoteComment}
-              downVoteComment={onDownVoteComment}
-              createComment={onCreateComment}
-            />
-          </div>
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full bg-gray-100">
+        <div className="flex flex-col items-center justify-center w-full mt-4 mb-4">
+          <ThreadDetail
+            {...threadDetail}
+            authUser={authUser.id}
+            upVoteThread={onUpVoteThread}
+            downVoteThread={onDownVoteThread}
+            upVoteComment={onUpVoteComment}
+            downVoteComment={onDownVoteComment}
+            createComment={onCreateComment}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default DetailPage;

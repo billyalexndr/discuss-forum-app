@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ThreadItem from './ThreadItem';
 
-const ThreadList = ({ threads, upVote, downVote }) => {
+function ThreadList({ threads, upVote, downVote }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const handleChangeCategory = (event) => {
@@ -20,10 +21,11 @@ const ThreadList = ({ threads, upVote, downVote }) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center mb-4">
-        <label htmlFor="category">Filter by category:</label>
+        <div>Filter by category:</div>
         <div className="flex flex-row">
           {categoryOptions.map((category) => (
             <button
+              type="button"
               key={category}
               className={`flex justify-center items-center mt-2 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-indigo-400 ${
                 selectedCategory === category
@@ -48,6 +50,17 @@ const ThreadList = ({ threads, upVote, downVote }) => {
       ))}
     </>
   );
+}
+
+ThreadList.propTypes = {
+  threads: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      category: PropTypes.string,
+    }),
+  ).isRequired,
+  upVote: PropTypes.func.isRequired,
+  downVote: PropTypes.func.isRequired,
 };
 
 export default ThreadList;
