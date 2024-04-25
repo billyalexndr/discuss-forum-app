@@ -3,12 +3,23 @@ import { BiLike, BiDislike, BiSolidLike, BiSolidDislike } from 'react-icons/bi';
 import { postedAt } from '../utils';
 
 const ThreadComments = ({
+  idThread,
+  authUser,
   comments,
-  upVote,
-  downVote,
-  isThreadUpVoted,
-  isThreadDownVoted,
+  upVoteComment,
+  downVoteComment,
 }) => {
+  const onUpVoteCommentClick = (event, commentId) => {
+    event.stopPropagation();
+    upVoteComment(idThread, commentId);
+    console.log(idThread, 'and', commentId);
+  };
+
+  const onDownVoteCommentClick = (event, commentId) => {
+    event.stopPropagation();
+    downVoteComment(idThread, commentId);
+  };
+
   return (
     <>
       <div className="mt-4">
@@ -37,18 +48,36 @@ const ThreadComments = ({
                 dangerouslySetInnerHTML={{ __html: comment.content }}
               />
               <div className="flex items-center gap-3">
-                {upVote && (
+                {upVoteComment && (
                   <div className="flex items-center gap-1">
-                    <button type="button">
-                      {isThreadUpVoted ? <BiSolidLike /> : <BiLike />}
+                    <button
+                      type="button"
+                      onClick={(event) =>
+                        onUpVoteCommentClick(event, comment.id)
+                      }
+                    >
+                      {comment.upVotesBy.includes(authUser) ? (
+                        <BiSolidLike />
+                      ) : (
+                        <BiLike />
+                      )}
                     </button>
                     {comment.upVotesBy.length}
                   </div>
                 )}
-                {downVote && (
+                {downVoteComment && (
                   <div className="flex items-center gap-1">
-                    <button type="button">
-                      {isThreadDownVoted ? <BiSolidDislike /> : <BiDislike />}
+                    <button
+                      type="button"
+                      onClick={(event) =>
+                        onDownVoteCommentClick(event, comment.id)
+                      }
+                    >
+                      {comment.downVotesBy.includes(authUser) ? (
+                        <BiSolidDislike />
+                      ) : (
+                        <BiDislike />
+                      )}
                     </button>
                     {comment.downVotesBy.length}
                   </div>

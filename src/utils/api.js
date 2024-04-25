@@ -199,6 +199,63 @@ const api = (() => {
         return comment;
     }
 
+    async function toggleUpVoteComment(idThread, idComment) {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${idThread}/comments/${idComment}/up-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            }),
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
+    async function toggleDownVoteComment(idThread, idComment) {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${idThread}/comments/${idComment}/down-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            }),
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
+    async function toggleNeutralVoteComment(idThread, idComment) {
+        const response = await fetchWithAuth(`${BASE_URL}/threads/${idThread}/comments/${idComment}/neutral-vote`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            }),
+        });
+
+        const responseJson = await response.json();
+
+        const { status, message } = responseJson;
+
+        if (status !== 'success') {
+            throw new Error(message);
+        }
+    }
+
     async function toggleUpVoteThread(id) {
         const response = await fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
             method: 'POST',
@@ -267,6 +324,9 @@ const api = (() => {
         getLeaderboards,
         createThread,
         createComment,
+        toggleUpVoteComment,
+        toggleDownVoteComment,
+        toggleNeutralVoteComment,
         toggleUpVoteThread,
         toggleDownVoteThread,
         toggleNeutralVoteThread,

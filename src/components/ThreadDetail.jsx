@@ -18,22 +18,23 @@ const ThreadDetail = ({
   upVotesBy,
   downVotesBy,
   authUser,
-  upVote,
-  downVote,
+  upVoteThread,
+  downVoteThread,
+  upVoteComment,
+  downVoteComment,
   createComment,
 }) => {
   const isThreadUpVoted = upVotesBy.includes(authUser);
   const isThreadDownVoted = downVotesBy.includes(authUser);
 
-  const onUpVoteClick = (event) => {
+  const onUpVoteThreadClick = (event) => {
     event.stopPropagation();
-    upVote(id);
-    console.log(id);
+    upVoteThread(id);
   };
 
-  const onDownVoteClick = (event) => {
+  const onDownVoteThreadClick = (event) => {
     event.stopPropagation();
-    downVote(id);
+    downVoteThread(id);
   };
 
   return (
@@ -49,17 +50,17 @@ const ThreadDetail = ({
           dangerouslySetInnerHTML={{ __html: body }}
         />
         <div className="flex items-center gap-3 mt-2 mb-2">
-          {upVote && (
+          {upVoteThread && (
             <div className="flex items-center gap-1">
-              <button type="button" onClick={onUpVoteClick}>
+              <button type="button" onClick={onUpVoteThreadClick}>
                 {isThreadUpVoted ? <BiSolidLike /> : <BiLike />}
               </button>
               {upVotesBy.length}
             </div>
           )}
-          {downVote && (
+          {downVoteThread && (
             <div className="flex items-center gap-1">
-              <button type="button" onClick={onDownVoteClick}>
+              <button type="button" onClick={onDownVoteThreadClick}>
                 {isThreadDownVoted ? <BiSolidDislike /> : <BiDislike />}
               </button>
               {downVotesBy.length}
@@ -83,11 +84,11 @@ const ThreadDetail = ({
         <CommentInput id={id} createComment={createComment} />
 
         <ThreadComments
+          idThread={id}
+          authUser={authUser}
           comments={comments}
-          upVote={upVote}
-          downVote={downVote}
-          isThreadUpVoted={isThreadUpVoted}
-          isThreadDownVoted={isThreadDownVoted}
+          upVoteComment={upVoteComment}
+          downVoteComment={downVoteComment}
         />
       </div>
     </>

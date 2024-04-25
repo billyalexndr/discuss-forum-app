@@ -8,7 +8,12 @@ import {
   asyncToggleDownVoteThreadDetail,
   asyncToggleNeutralVoteThreadDetail,
 } from '../states/threadDetail/action';
-import { asyncCreateComment } from '../states/comments/action';
+import {
+  asyncCreateComment,
+  asyncToggleDownVoteComment,
+  asyncToggleNeutralVoteComment,
+  asyncToggleUpVoteComment,
+} from '../states/comments/action';
 import NotFoundPage from './NotFoundPage';
 
 const DetailPage = () => {
@@ -24,8 +29,7 @@ const DetailPage = () => {
     dispatch(asyncCreateComment(id, content));
   };
 
-  // console.log(threadDetail);
-  const onUpVote = (id) => {
+  const onUpVoteThread = (id) => {
     if (threadDetail && threadDetail.upVotesBy.includes(authUser.id)) {
       dispatch(asyncToggleNeutralVoteThreadDetail(id));
     } else {
@@ -33,11 +37,39 @@ const DetailPage = () => {
     }
   };
 
-  const onDownVote = (id) => {
+  const onDownVoteThread = (id) => {
     if (threadDetail && threadDetail.downVotesBy.includes(authUser.id)) {
       dispatch(asyncToggleNeutralVoteThreadDetail(id));
     } else {
       dispatch(asyncToggleDownVoteThreadDetail(id));
+    }
+  };
+
+  const onUpVoteComment = (idThread, commentId) => {
+    if (
+      threadDetail &&
+      threadDetail.comments.some(
+        (comment) =>
+          comment.id === commentId && comment.upVotesBy.includes(authUser.id),
+      )
+    ) {
+      dispatch(asyncToggleNeutralVoteComment(idThread, commentId));
+    } else {
+      dispatch(asyncToggleUpVoteComment(idThread, commentId));
+    }
+  };
+
+  const onDownVoteComment = (idThread, commentId) => {
+    if (
+      threadDetail &&
+      threadDetail.comments.some(
+        (comment) =>
+          comment.id === commentId && comment.downVotesBy.includes(authUser.id),
+      )
+    ) {
+      dispatch(asyncToggleNeutralVoteComment(idThread, commentId));
+    } else {
+      dispatch(asyncToggleDownVoteComment(idThread, commentId));
     }
   };
 
@@ -53,8 +85,10 @@ const DetailPage = () => {
             <ThreadDetail
               {...threadDetail}
               authUser={authUser.id}
-              upVote={onUpVote}
-              downVote={onDownVote}
+              upVoteThread={onUpVoteThread}
+              downVoteThread={onDownVoteThread}
+              upVoteComment={onUpVoteComment}
+              downVoteComment={onDownVoteComment}
               createComment={onCreateComment}
             />
           </div>
