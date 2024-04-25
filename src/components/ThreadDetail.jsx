@@ -104,8 +104,8 @@ ThreadDetail.propTypes = {
   }).isRequired,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
+      id: PropTypes.string,
+      text: PropTypes.string,
     }),
   ).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,

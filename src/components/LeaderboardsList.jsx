@@ -16,12 +16,12 @@ LeaderboardsList.propTypes = {
   leaderboards: PropTypes.arrayOf(
     PropTypes.shape({
       user: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        score: PropTypes.number.isRequired,
-        avatar: PropTypes.string.isRequired,
+        id: PropTypes.string,
+        name: PropTypes.string,
+        email: PropTypes.string,
+        avatar: PropTypes.string,
       }).isRequired,
-      rank: PropTypes.number.isRequired,
+      score: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };

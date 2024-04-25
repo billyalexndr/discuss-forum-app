@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Navigation({ signOut }) {
   return (
-    <nav className="sticky top-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 start-0 dark:border-gray-600">
+    <nav className="sticky top-0 w-full bg-white border-b border-gray-200 dark:bg-gray-900 start-0 dark:border-gray-600">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <Link
           to="/"
