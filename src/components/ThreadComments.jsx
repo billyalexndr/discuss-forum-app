@@ -12,7 +12,6 @@ const ThreadComments = ({
   const onUpVoteCommentClick = (event, commentId) => {
     event.stopPropagation();
     upVoteComment(idThread, commentId);
-    console.log(idThread, 'and', commentId);
   };
 
   const onDownVoteCommentClick = (event, commentId) => {

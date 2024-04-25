@@ -30,8 +30,12 @@ const ThreadsPage = () => {
         ?.upVotesBy.includes(authUser.id)
     ) {
       dispatch(asyncToggleNeutralVoteThread(id));
+      alert('Thread successfully neutral voted.');
+      window.location.reload();
     } else {
       dispatch(asyncToggleUpVoteThread(id));
+      alert('Thread successfully up voted.');
+      window.location.reload();
     }
   };
 
@@ -42,8 +46,12 @@ const ThreadsPage = () => {
         ?.downVotesBy.includes(authUser.id)
     ) {
       dispatch(asyncToggleNeutralVoteThread(id));
+      alert('Thread successfully neutral voted.');
+      window.location.reload();
     } else {
       dispatch(asyncToggleDownVoteThread(id));
+      alert('Thread successfully down voted.');
+      window.location.reload();
     }
   };
 

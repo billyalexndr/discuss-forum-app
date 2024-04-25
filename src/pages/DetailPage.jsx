@@ -31,16 +31,24 @@ const DetailPage = () => {
   const onUpVoteThread = (id) => {
     if (threadDetail && threadDetail.upVotesBy.includes(authUser.id)) {
       dispatch(asyncToggleNeutralVoteThreadDetail(id));
+      alert('Thread successfully neutral voted.');
+      window.location.reload();
     } else {
       dispatch(asyncToggleUpVoteThreadDetail(id));
+      alert('Thread successfully up voted.');
+      window.location.reload();
     }
   };
 
   const onDownVoteThread = (id) => {
     if (threadDetail && threadDetail.downVotesBy.includes(authUser.id)) {
       dispatch(asyncToggleNeutralVoteThreadDetail(id));
+      alert('Thread successfully neutral voted.');
+      window.location.reload();
     } else {
       dispatch(asyncToggleDownVoteThreadDetail(id));
+      alert('Thread successfully down voted.');
+      window.location.reload();
     }
   };
 
@@ -53,8 +61,12 @@ const DetailPage = () => {
       )
     ) {
       dispatch(asyncToggleNeutralVoteComment(idThread, commentId));
+      alert('Comment successfully neutral voted.');
+      window.location.reload();
     } else {
       dispatch(asyncToggleUpVoteComment(idThread, commentId));
+      alert('Comment successfully up voted.');
+      window.location.reload();
     }
   };
 
@@ -67,8 +79,12 @@ const DetailPage = () => {
       )
     ) {
       dispatch(asyncToggleNeutralVoteComment(idThread, commentId));
+      alert('Comment successfully neutral voted.');
+      window.location.reload();
     } else {
       dispatch(asyncToggleDownVoteComment(idThread, commentId));
+      alert('Comment successfully down voted.');
+      window.location.reload();
     }
   };
 
