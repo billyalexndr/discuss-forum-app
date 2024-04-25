@@ -72,6 +72,7 @@ function asyncCreateThread({ title, body, category = '' }) {
 
 function asyncToggleUpVoteThread(threadId) {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     const { authUser } = getState();
     dispatch(
       toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }),
@@ -81,11 +82,11 @@ function asyncToggleUpVoteThread(threadId) {
       await api.toggleUpVoteThread(threadId);
     } catch (error) {
       alert(error.message);
-      // Jika respons dari server gagal, kembalikan status upvote ke kondisi sebelumnya
       dispatch(
         toggleNeutralVoteThreadActionCreator({ threadId, userId: authUser.id }),
       );
     }
+    dispatch(hideLoading());
   };
 }
 

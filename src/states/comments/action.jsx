@@ -69,6 +69,7 @@ function asyncCreateComment({ id, content }) {
 
 function asyncToggleUpVoteComment(threadId, commentId) {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     const { authUser } = getState();
     dispatch(
       toggleUpVoteCommentActionCreator({
@@ -90,6 +91,7 @@ function asyncToggleUpVoteComment(threadId, commentId) {
         }),
       );
     }
+    dispatch(hideLoading());
   };
 }
 

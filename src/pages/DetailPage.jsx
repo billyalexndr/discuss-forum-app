@@ -14,7 +14,6 @@ import {
   asyncToggleNeutralVoteComment,
   asyncToggleUpVoteComment,
 } from '../states/comments/action';
-import NotFoundPage from './NotFoundPage';
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -74,7 +73,7 @@ const DetailPage = () => {
   };
 
   if (!threadDetail) {
-    return <NotFoundPage />;
+    return null;
   }
 
   return (

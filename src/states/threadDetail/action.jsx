@@ -67,6 +67,7 @@ function asyncReceiveThreadDetail(threadId) {
 
 function asyncToggleUpVoteThreadDetail(threadId) {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     const { authUser } = getState();
     dispatch(
       toggleUpVoteThreadDetailActionCreator({ threadId, userId: authUser.id }),
@@ -83,6 +84,7 @@ function asyncToggleUpVoteThreadDetail(threadId) {
         }),
       );
     }
+    dispatch(hideLoading());
   };
 }
 
