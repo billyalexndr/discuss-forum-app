@@ -7,13 +7,11 @@ import {
   asyncToggleUpVoteThreadDetail,
   asyncToggleDownVoteThreadDetail,
   asyncToggleNeutralVoteThreadDetail,
-} from '../states/threadDetail/action';
-import {
   asyncCreateComment,
   asyncToggleDownVoteComment,
   asyncToggleNeutralVoteComment,
   asyncToggleUpVoteComment,
-} from '../states/comments/action';
+} from '../states/threadDetail/action';
 
 function DetailPage() {
   const { id } = useParams();
@@ -28,28 +26,16 @@ function DetailPage() {
     dispatch(asyncCreateComment(id, content));
   };
 
-  const onUpVoteThread = (id) => {
-    if (threadDetail && threadDetail.upVotesBy.includes(authUser.id)) {
-      dispatch(asyncToggleNeutralVoteThreadDetail(id));
-      alert('Thread successfully neutral voted.');
-      window.location.reload();
-    } else {
-      dispatch(asyncToggleUpVoteThreadDetail(id));
-      alert('Thread successfully up voted.');
-      window.location.reload();
-    }
+  const onUpVoteThread = () => {
+    dispatch(asyncToggleUpVoteThreadDetail());
   };
 
-  const onDownVoteThread = (id) => {
-    if (threadDetail && threadDetail.downVotesBy.includes(authUser.id)) {
-      dispatch(asyncToggleNeutralVoteThreadDetail(id));
-      alert('Thread successfully neutral voted.');
-      window.location.reload();
-    } else {
-      dispatch(asyncToggleDownVoteThreadDetail(id));
-      alert('Thread successfully down voted.');
-      window.location.reload();
-    }
+  const onDownVoteThread = () => {
+    dispatch(asyncToggleDownVoteThreadDetail());
+  };
+
+  const onNeutralVoteThread = () => {
+    dispatch(asyncToggleNeutralVoteThreadDetail());
   };
 
   const onUpVoteComment = (idThread, commentId) => {
@@ -61,12 +47,8 @@ function DetailPage() {
       )
     ) {
       dispatch(asyncToggleNeutralVoteComment(idThread, commentId));
-      alert('Comment successfully neutral voted.');
-      window.location.reload();
     } else {
       dispatch(asyncToggleUpVoteComment(idThread, commentId));
-      alert('Comment successfully up voted.');
-      window.location.reload();
     }
   };
 
@@ -79,12 +61,8 @@ function DetailPage() {
       )
     ) {
       dispatch(asyncToggleNeutralVoteComment(idThread, commentId));
-      alert('Comment successfully neutral voted.');
-      window.location.reload();
     } else {
       dispatch(asyncToggleDownVoteComment(idThread, commentId));
-      alert('Comment successfully down voted.');
-      window.location.reload();
     }
   };
 
@@ -101,6 +79,7 @@ function DetailPage() {
             authUser={authUser.id}
             upVoteThread={onUpVoteThread}
             downVoteThread={onDownVoteThread}
+            neutralVoteThread={onNeutralVoteThread}
             upVoteComment={onUpVoteComment}
             downVoteComment={onDownVoteComment}
             createComment={onCreateComment}

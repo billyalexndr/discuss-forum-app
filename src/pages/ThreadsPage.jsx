@@ -24,35 +24,15 @@ function ThreadsPage() {
   }, [dispatch]);
 
   const onUpVote = (id) => {
-    if (
-      threads
-        .find((thread) => thread.id === id)
-        ?.upVotesBy.includes(authUser.id)
-    ) {
-      dispatch(asyncToggleNeutralVoteThread(id));
-      alert('Thread successfully neutral voted.');
-      window.location.reload();
-    } else {
-      dispatch(asyncToggleUpVoteThread(id));
-      alert('Thread successfully up voted.');
-      window.location.reload();
-    }
+    dispatch(asyncToggleUpVoteThread(id));
   };
 
   const onDownVote = (id) => {
-    if (
-      threads
-        .find((thread) => thread.id === id)
-        ?.downVotesBy.includes(authUser.id)
-    ) {
-      dispatch(asyncToggleNeutralVoteThread(id));
-      alert('Thread successfully neutral voted.');
-      window.location.reload();
-    } else {
-      dispatch(asyncToggleDownVoteThread(id));
-      alert('Thread successfully down voted.');
-      window.location.reload();
-    }
+    dispatch(asyncToggleDownVoteThread(id));
+  };
+
+  const onNeutralVote = (id) => {
+    dispatch(asyncToggleNeutralVoteThread(id));
   };
 
   const threadList = threads.map((thread) => ({
@@ -69,6 +49,7 @@ function ThreadsPage() {
             threads={threadList}
             upVote={onUpVote}
             downVote={onDownVote}
+            neutralVote={onNeutralVote}
           />
         </div>
         <div className="fixed bottom-4 right-4">

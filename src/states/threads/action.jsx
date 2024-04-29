@@ -27,31 +27,31 @@ function createThreadActionCreator(thread) {
   };
 }
 
-function toggleUpVoteThreadActionCreator({ threadsId, userId }) {
+function toggleUpVoteThreadActionCreator({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_UPVOTE_THREAD,
     payload: {
-      threadsId,
+      threadId,
       userId,
     },
   };
 }
 
-function toggleDownVoteThreadActionCreator({ threadsId, userId }) {
+function toggleDownVoteThreadActionCreator({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_DOWNVOTE_THREAD,
     payload: {
-      threadsId,
+      threadId,
       userId,
     },
   };
 }
 
-function toggleNeutralVoteThreadActionCreator({ threadsId, userId }) {
+function toggleNeutralVoteThreadActionCreator({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_NEUTRAL_THREAD,
     payload: {
-      threadsId,
+      threadId,
       userId,
     },
   };
@@ -83,7 +83,7 @@ function asyncToggleUpVoteThread(threadId) {
     } catch (error) {
       alert(error.message);
       dispatch(
-        toggleNeutralVoteThreadActionCreator({ threadId, userId: authUser.id }),
+        toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }),
       );
     }
     dispatch(hideLoading());

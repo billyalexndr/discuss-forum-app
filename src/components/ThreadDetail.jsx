@@ -19,22 +19,13 @@ function ThreadDetail({
   authUser,
   upVoteThread,
   downVoteThread,
+  neutralVoteThread,
   upVoteComment,
   downVoteComment,
   createComment,
 }) {
   const isThreadUpVoted = upVotesBy.includes(authUser);
   const isThreadDownVoted = downVotesBy.includes(authUser);
-
-  const onUpVoteThreadClick = (event) => {
-    event.stopPropagation();
-    upVoteThread(id);
-  };
-
-  const onDownVoteThreadClick = (event) => {
-    event.stopPropagation();
-    downVoteThread(id);
-  };
 
   return (
     <div className="w-2/4 p-6 mb-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -50,15 +41,34 @@ function ThreadDetail({
       <div className="flex items-center gap-3 mt-2 mb-2">
         {upVoteThread && (
           <div className="flex items-center gap-1">
-            <button type="button" onClick={onUpVoteThreadClick}>
+            <button
+              type="button"
+              onClick={() => {
+                if (isThreadUpVoted) {
+                  neutralVoteThread(id);
+                } else {
+                  upVoteThread(id);
+                }
+              }}
+            >
               {isThreadUpVoted ? <BiSolidLike /> : <BiLike />}
             </button>
+
             {upVotesBy.length}
           </div>
         )}
         {downVoteThread && (
           <div className="flex items-center gap-1">
-            <button type="button" onClick={onDownVoteThreadClick}>
+            <button
+              type="button"
+              onClick={() => {
+                if (isThreadDownVoted) {
+                  neutralVoteThread(id);
+                } else {
+                  downVoteThread(id);
+                }
+              }}
+            >
               {isThreadDownVoted ? <BiSolidDislike /> : <BiDislike />}
             </button>
             {downVotesBy.length}

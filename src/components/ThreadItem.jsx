@@ -18,6 +18,7 @@ function ThreadItem({
   authUser,
   upVote,
   downVote,
+  neutralVote,
 }) {
   const isThreadUpVoted = upVotesBy.includes(authUser);
   const isThreadDownVoted = downVotesBy.includes(authUser);
@@ -30,6 +31,11 @@ function ThreadItem({
   const onDownVoteClick = (event) => {
     event.stopPropagation();
     downVote(id);
+  };
+
+  const onNeutralVoteClick = (event) => {
+    event.stopPropagation();
+    neutralVote(id);
   };
 
   const firstSentence = body.split('. ')[0];
@@ -48,7 +54,10 @@ function ThreadItem({
       <div className="flex items-center gap-3">
         {upVote && (
           <div className="flex items-center gap-1">
-            <button type="button" onClick={onUpVoteClick}>
+            <button
+              type="button"
+              onClick={isThreadUpVoted ? onNeutralVoteClick : onUpVoteClick}
+            >
               {isThreadUpVoted ? <BiSolidLike /> : <BiLike />}
             </button>
             {upVotesBy.length}
@@ -56,7 +65,10 @@ function ThreadItem({
         )}
         {downVote && (
           <div className="flex items-center gap-1">
-            <button type="button" onClick={onDownVoteClick}>
+            <button
+              type="button"
+              onClick={isThreadDownVoted ? onNeutralVoteClick : onDownVoteClick}
+            >
               {isThreadDownVoted ? <BiSolidDislike /> : <BiDislike />}
             </button>
             {downVotesBy.length}

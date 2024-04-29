@@ -11,8 +11,6 @@ function CommentInput({ id, createComment }) {
     if (commentContent.trim() !== '') {
       createComment({ id, content: commentContent });
       setCommentContent('');
-      alert('Comment successfully posted.');
-      window.location.reload();
     } else {
       alert('Please enter your comment before posting.');
     }

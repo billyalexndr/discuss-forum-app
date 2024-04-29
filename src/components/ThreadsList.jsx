@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ThreadItem from './ThreadItem';
 
-function ThreadList({ threads, upVote, downVote }) {
+function ThreadList({ threads, upVote, downVote, neutralVote }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const handleChangeCategory = (event) => {
@@ -46,6 +46,7 @@ function ThreadList({ threads, upVote, downVote }) {
           {...thread}
           upVote={upVote}
           downVote={downVote}
+          neutralVote={neutralVote}
         />
       ))}
     </>
