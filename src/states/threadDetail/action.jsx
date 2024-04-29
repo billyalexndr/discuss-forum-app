@@ -125,7 +125,6 @@ function asyncToggleUpVoteThreadDetail() {
       await api.toggleUpVoteThread(threadDetail.id);
     } catch (error) {
       alert(error.message);
-      console.log(threadDetail);
     }
     dispatch(hideLoading());
   };

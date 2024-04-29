@@ -113,6 +113,7 @@ ThreadItem.propTypes = {
   authUser: PropTypes.string.isRequired,
   upVote: PropTypes.func.isRequired,
   downVote: PropTypes.func.isRequired,
+  neutralVote: PropTypes.func.isRequired,
 };
 
 export default ThreadItem;

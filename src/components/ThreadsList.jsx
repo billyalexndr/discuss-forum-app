@@ -62,6 +62,7 @@ ThreadList.propTypes = {
   ).isRequired,
   upVote: PropTypes.func.isRequired,
   downVote: PropTypes.func.isRequired,
+  neutralVote: PropTypes.func.isRequired,
 };
 
 export default ThreadList;

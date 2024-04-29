@@ -123,6 +123,7 @@ ThreadDetail.propTypes = {
   authUser: PropTypes.string.isRequired,
   upVoteThread: PropTypes.func.isRequired,
   downVoteThread: PropTypes.func.isRequired,
+  neutralVoteThread: PropTypes.func.isRequired,
   upVoteComment: PropTypes.func.isRequired,
   downVoteComment: PropTypes.func.isRequired,
   createComment: PropTypes.func.isRequired,
