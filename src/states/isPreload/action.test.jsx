@@ -2,11 +2,7 @@ import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import { setAuthUserActionCreator } from '../authUser/action';
-import {
-  ActionType,
-  setIsPreloadActionCreator,
-  asyncPreloadProcess,
-} from './action';
+import { setIsPreloadActionCreator, asyncPreloadProcess } from './action';
 
 describe('asyncPreloadProcess thunk', () => {
   beforeEach(() => {

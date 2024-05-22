@@ -6,7 +6,6 @@ import {
   asyncUnsetAuthUser,
   setAuthUserActionCreator,
   unsetAuthUserActionCreator,
-  ActionType,
 } from './action';
 
 const fakeAuthUserResponse = {

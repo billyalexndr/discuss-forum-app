@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LeaderboardItem from './LeaderboardItem';
+import LeaderboardItem from './styled/LeaderboardItem';
 
 function LeaderboardsList({ leaderboards }) {
   return (
