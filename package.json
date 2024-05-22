@@ -11,7 +11,8 @@
     "test": "vitest",
     "e2e": "cypress run",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "ci:test": "vitest --no-watch && start-server-and-test dev http-get://0.0.0.0:5173 e2e"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
@@ -63,6 +64,7 @@
     "jsdom": "^24.0.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
+    "start-server-and-test": "^2.0.3",
     "storybook": "^8.1.1",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0",
