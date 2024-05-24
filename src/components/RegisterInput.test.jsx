@@ -5,6 +5,16 @@ import userEvent from '@testing-library/user-event';
 import matchers from '@testing-library/jest-dom/matchers';
 import RegisterInput from './RegisterInput';
 
+/**
+ * test scenario for RegisterInput component
+ *
+ * - RegisterInput component
+ *  - should handle name typing correctly
+ *  - should handle email typing correctly
+ *  - should handle password typing correctly
+ *  - should call register function when register button is clicked
+ */
+
 expect.extend(matchers);
 
 describe('RegisterInput component', () => {
@@ -13,43 +23,33 @@ describe('RegisterInput component', () => {
   });
 
   it('should handle name typing correctly', async () => {
-    // Arrange
     render(<RegisterInput register={() => {}} />);
     const nameInput = await screen.getByPlaceholderText('Name');
 
-    // Action
     await userEvent.type(nameInput, 'John Doe');
 
-    // Assert
     expect(nameInput).toHaveValue('John Doe');
   });
 
   it('should handle email typing correctly', async () => {
-    // Arrange
     render(<RegisterInput register={() => {}} />);
     const emailInput = await screen.getByPlaceholderText('Email');
 
-    // Action
     await userEvent.type(emailInput, 'emailtest@example.com');
 
-    // Assert
     expect(emailInput).toHaveValue('emailtest@example.com');
   });
 
   it('should handle password typing correctly', async () => {
-    // Arrange
     render(<RegisterInput register={() => {}} />);
     const passwordInput = await screen.getByPlaceholderText('Password');
 
-    // Action
     await userEvent.type(passwordInput, 'passwordtest');
 
-    // Assert
     expect(passwordInput).toHaveValue('passwordtest');
   });
 
   it('should call register function when register button is clicked', async () => {
-    // Arrange
     const mockRegister = vi.fn();
     render(<RegisterInput register={mockRegister} />);
     const nameInput = await screen.getByPlaceholderText('Name');
@@ -62,10 +62,8 @@ describe('RegisterInput component', () => {
       name: 'Register',
     });
 
-    // Action
     await userEvent.click(registerButton);
 
-    // Assert
     expect(mockRegister).toBeCalledWith({
       name: 'John Doe',
       email: 'emailtest@example.com',

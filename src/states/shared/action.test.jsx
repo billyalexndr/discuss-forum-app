@@ -5,6 +5,14 @@ import { asyncPopulateDataForum } from './action';
 import { receiveThreadsActionCreator } from '../threads/action';
 import { receiveUsersActionCreator } from '../users/action';
 
+/**
+ * test scenario for asyncPopulateDataForum Thunk
+ *
+ * - asyncPopulateDataForum Thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and call alert correctly when data fetching failed
+ */
+
 const fakeThreadsResponse = [
   {
     id: 'thread-1',
@@ -54,24 +62,19 @@ describe('asyncPopulateDataForum thunk', () => {
     api.getAllThreads = api._getAllThreads;
     api.getLeaderboards = api._getLeaderboards;
 
-    // delete backup data
     delete api._getAllUsers;
     delete api._getAllThreads;
     delete api._getLeaderboards;
   });
 
   it('should dispatch action correctly when data fetching success', async () => {
-    // arrange
-    // stub implementation
     api.getAllUsers = () => Promise.resolve(fakeUsersResponse);
     api.getAllThreads = () => Promise.resolve(fakeThreadsResponse);
     api.getLeaderboards = () => Promise.resolve(fakeLeaderboardsResponse);
 
-    // action
     const dispatch = vi.fn();
     await asyncPopulateDataForum()(dispatch);
 
-    // assert
     expect(dispatch).toHaveBeenCalledWith(showLoading());
     expect(dispatch).toHaveBeenCalledWith(
       receiveThreadsActionCreator(fakeThreadsResponse),

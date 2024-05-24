@@ -3,6 +3,14 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import { asyncRegisterUser } from './action';
 
+/**
+ * test scenario for asyncRegisterUser Thunk
+ *
+ * - asyncRegisterUser Thunk
+ *  - should dispatch action correctly when user registration success
+ *  - should dispatch action and call alert correctly when user registration failed
+ */
+
 const fakeUser = {
   name: 'John Doe',
   email: 'john@example.com',

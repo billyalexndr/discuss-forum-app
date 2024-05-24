@@ -8,6 +8,18 @@ import {
   unsetAuthUserActionCreator,
 } from './action';
 
+/**
+ * test scenario for authUser Thunk
+ *
+ * - asyncSetAuthUser Thunk
+ *  - should dispatch actions correctly when login is successful
+ *  - should dispatch actions and call alert correctly when login fails
+ *  - should show alert when trying to post an empty comment
+ *
+ * - asyncUnsetAuthUser Thunk
+ *  - should dispatch actions correctly when logging out
+ */
+
 const fakeAuthUserResponse = {
   id: 'user-1',
   name: 'John Doe',

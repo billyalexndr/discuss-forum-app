@@ -4,6 +4,14 @@ import api from '../../utils/api';
 import { setAuthUserActionCreator } from '../authUser/action';
 import { setIsPreloadActionCreator, asyncPreloadProcess } from './action';
 
+/**
+ * test scenario for isPreload Thunk
+ *
+ * - asyncPreloadProcess Thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action correctly when data fetching failed
+ */
+
 describe('asyncPreloadProcess thunk', () => {
   beforeEach(() => {
     api._getOwnProfile = api.getOwnProfile;
@@ -16,7 +24,6 @@ describe('asyncPreloadProcess thunk', () => {
   });
 
   it('should dispatch action correctly when data fetching success', async () => {
-    // arrange
     const fakeAuthUserResponse = {
       id: 'user-1',
       name: 'John Doe',
@@ -28,10 +35,8 @@ describe('asyncPreloadProcess thunk', () => {
 
     const dispatch = vi.fn();
 
-    // action
     await asyncPreloadProcess()(dispatch);
 
-    // assert
     expect(dispatch).toHaveBeenCalledWith(showLoading());
     expect(dispatch).toHaveBeenCalledWith(
       setAuthUserActionCreator(fakeAuthUserResponse),
@@ -41,17 +46,14 @@ describe('asyncPreloadProcess thunk', () => {
   });
 
   it('should dispatch action correctly when data fetching failed', async () => {
-    // arrange
     const fakeErrorResponse = new Error('Ups, something went wrong');
 
     api.getOwnProfile = () => Promise.reject(fakeErrorResponse);
 
     const dispatch = vi.fn();
 
-    // action
     await asyncPreloadProcess()(dispatch);
 
-    // assert
     expect(dispatch).toHaveBeenCalledWith(showLoading());
     expect(dispatch).toHaveBeenCalledWith(setAuthUserActionCreator(null));
     expect(dispatch).toHaveBeenCalledWith(setIsPreloadActionCreator(false));
